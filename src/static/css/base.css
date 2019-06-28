@@ -1,0 +1,104 @@
+.body {
+    background-color: #fff;
+    display: inline;
+}
+
+.divHeader{
+    display: block;
+    align-items: center;
+    background-color: #2c3e50;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+    height: 50px;
+    width: 100%;
+    top: 0;
+    position: absolute;
+}
+
+.logo{
+    padding-left: 10px;
+    float: left;
+    width: 10%;
+}
+
+.user{
+    position: relative;
+    top: -3px;
+}
+
+.imglogo{
+    position: relative;
+    top: 5px;
+    right: -19px;
+    width: 76px;
+    height: 39px;
+}
+
+.login{
+    float: right;
+    align-items: center;
+    color: #2c3e50;
+    background-color: #fff;
+    width: 2%;
+    height: 26px;
+    border-radius: 20px;
+    padding: 3px;
+    position: relative;
+    top: 10px;
+    right: 15px;
+}
+
+ul{
+    list-style: none;
+}
+
+.divList{
+    background-color: rgb(233, 230, 230);
+    margin-top: 46px;
+    margin-left: 9px;
+}
+
+.listusers{
+    background-color: rgb(233, 230, 230);
+}
+
+.divFilters{
+    margin-top: 46px;
+    margin-right: 0px;
+    padding-top: 10px;
+    padding-bottom: 100%;
+    width: 20%;
+    font-size: 20px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+    background-color: rgb(255, 255, 255);
+}
+
+.textFilter{
+    padding-left: 20px;
+}
+
+.filter{
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.pesquisa{
+    width: 70%;    
+    float: unset;
+}
+
+.input{
+    width: 70%;
+    padding-left: 30px;
+    border-radius: 30px;
+    border: 0;
+    height: 30px;
+    font-size: 17px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.icon{
+    color: #A5CD00;
+    left: 24px;
+    position: relative;
+}
