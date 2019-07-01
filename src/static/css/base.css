@@ -14,6 +14,12 @@
     position: absolute;
 }
 
+.clickUser {
+    cursor: pointer;
+    width: 85%;
+    padding-left: 10px;
+}
+
 .logo{
     padding-left: 10px;
     float: left;
@@ -22,7 +28,7 @@
 
 .user{
     position: relative;
-    top: -3px;
+    top: 0px;
 }
 
 .imglogo{
@@ -40,32 +46,61 @@
     background-color: #fff;
     width: 2%;
     height: 26px;
-    border-radius: 20px;
+    border-radius: 50%;
     padding: 3px;
     position: relative;
-    top: 10px;
-    right: 15px;
+    top: -38px;
+    right: 50px;
 }
 
 ul{
     list-style: none;
 }
 
+
+
 .divList{
-    background-color: rgb(233, 230, 230);
-    margin-top: 46px;
-    margin-left: 9px;
+    margin-top: 60px;
+    width: 100%;
+}
+
+.divUser{
+    width: 100%;
+    margin-bottom: 2px;
+    align-items: center;
+    text-align: left;
+    padding-right: 0%;
+    background-color: #fff;
+    height: 50px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(211, 211, 211);
+    -webkit-box-shadow: 0px 0px 2px 2px rgba(138, 138, 138, 0.5);
+    -moz-box-shadow: 0px 0px 2px 2px rgba(138, 138, 138, 0.5);
+    box-shadow: 0px 0px 2px 2px rgba(138, 138, 138, 0.5);
+}
+
+.tableUsers{
+    padding-top: 10px;
 }
 
 .listusers{
     background-color: rgb(233, 230, 230);
 }
 
+.thumbUser{
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    margin-right: 13px;
+}
+
 .divFilters{
     margin-top: 46px;
     margin-right: 0px;
     padding-top: 10px;
-    padding-bottom: 100%;
+    padding-bottom: 50%;
     width: 20%;
     font-size: 20px;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
