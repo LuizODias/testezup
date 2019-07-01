@@ -16,8 +16,12 @@
 
 .clickUser {
     cursor: pointer;
-    width: 85%;
+    width: 90%;
     padding-left: 10px;
+}
+.icons{
+    float: right;
+    width: 10%;
 }
 
 .logo{
@@ -56,7 +60,6 @@
 ul{
     list-style: none;
 }
-
 
 
 .divList{
@@ -109,6 +112,10 @@ ul{
 
 .textFilter{
     padding-left: 20px;
+}
+
+.ativo{
+    color: #A5CD00;
 }
 
 .filter{

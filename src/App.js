@@ -13,6 +13,7 @@ class App extends Component {
     this.showDeleteds   = this.showDeleteds.bind(this);
     this.showAll        = this.showAll.bind(this);
     this.showAttendeds  = this.showAttendeds.bind(this)
+    this.search         = this.search.bind(this);
 
     this.deleteUser     = this.deleteUser.bind(this);
     this.recoveryUser   = this.recoveryUser.bind(this);
@@ -22,6 +23,7 @@ class App extends Component {
     this.setUsers       = this.setUsers.bind(this);
     this.setDeleteds    = this.setDeleteds.bind(this);
     this.setAttendeds   = this.setAttendeds.bind(this);
+    this.setSearch      = this.setSearch.bind(this);
 
     this.state = {
       users:          [],
@@ -29,6 +31,7 @@ class App extends Component {
       attendeds:      [],
       usersIntegral:  [],
       show:           [],
+      pesquisa:         '',
       excluidos:      true,
       todos:          false,
       atendidos:      true,
@@ -48,6 +51,10 @@ class App extends Component {
   
   setShowed(array){
     this.setState({show: array});
+  }
+
+  setSearch(evento){
+    this.setState({pesquisa: evento.target.value});
   }
 
   setUsers(array){
@@ -72,9 +79,13 @@ class App extends Component {
 
   showAttendeds(){
     this.setState({show: this.state.attendeds, excluidos: true, todos: true, atendidos: false});
+    let li = document.getElementById("liAtendidos");
+
+    console.log(li);
   }
 
   fetchUser(){
+    debugger;
     fetch('https://randomuser.me/api/?results=10&nat=br')
       .then(response => response.json())
       .then(result =>{
@@ -83,6 +94,19 @@ class App extends Component {
       );
   }
   
+  search(evento){
+    
+    let pesquisa = evento.target.value;
+
+    var array = JSON.parse(JSON.stringify(this.state.usersIntegral));
+
+    array = array.filter(function(user){        
+      return user.name === pesquisa;
+    });    
+
+    this.setState({show:array});
+  }
+
   deleteUser(user) {
     let cloneUsers      = JSON.parse(JSON.stringify(this.state.users));;
     let cloneDeleteds   = JSON.parse(JSON.stringify(this.state.deleteds));
@@ -170,7 +194,7 @@ class App extends Component {
       
       this.setDeleteds(cloneDeleteds);
       this.setAttendeds(cloneAttendeds);
-      this.setShowed(cloneAttendeds);
+      this.setShowed(cloneDeleteds);
     }  
     else
       alert('Você não pode atender o usuário já foi atendido!');
@@ -186,7 +210,7 @@ class App extends Component {
           </div>
           <div>
               <span className="icon"><i className="fa fa-search"></i></span>
-              <input className="input" type="text" placeholder=" Buscar" />
+              <input className="input" type="text" placeholder=" Buscar" value={this.state.pesquisa} onKeyUp={this.search} onChange={this.setSearch.bind(this)}/>
           </div>
           <div className="login">
               <i className="fa fa-user fa-2x user"></i>
@@ -199,19 +223,19 @@ class App extends Component {
         <div className="row divList">
           <div className="col-2">
             <ul>
-                <li>
+                <li id="liTodos">
                   <button className="btn" placeholder="Exibir todos" onClick={this.showAll}>
                     <i className="fa fa-list"></i>
                     <span className="textFilter">Todos</span>
                   </button>
                 </li>
-                <li>
+                <li id="liAtendidos">
                   <button className="btn" placeholder="Exibir atendidos" onClick={this.showAttendeds}>
                     <i className="fa fa-check"></i>
                     <span className="textFilter">Atendidos</span>
                   </button>
                 </li>
-                <li>
+                <li id="liExcluidos">
                   <button className="btn" placeholder="Exibir excluídos" onClick={this.showDeleteds}>
                     <i className="fa fa-trash filter"></i>
                     <span className="textFilter">Lixeira</span>
@@ -219,7 +243,7 @@ class App extends Component {
                 </li>
             </ul>
           </div>
-          <div className="col-9">
+          <div className="col-10">
             <div className="tableUsers">
             {
               this.state.show.map((user) => {
@@ -233,14 +257,14 @@ class App extends Component {
                       <div className="col-4">
                         {user.email} 
                       </div>
-                      <div className="col-3">
+                      <div className="col-2">
                         {user.phone} 
                       </div>
-                      <div className="col-2">
+                      <div className="col-3">
                         {user.location.city}
                       </div>
                     </div>
-                    <div className="col-2 icons">
+                    <div className="icons">
                       {(this.state.excluidos ? 
                         (<button className="btn" placeholder="Excluir" onClick={() => this.deleteUser(user)}><i className="fa fa-trash"></i></button>)
                         :(<span></span>)
