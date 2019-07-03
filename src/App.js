@@ -39,7 +39,7 @@ class App extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.fetchUser();
   }
 
@@ -85,7 +85,6 @@ class App extends Component {
   }
 
   fetchUser(){
-    debugger;
     fetch('https://randomuser.me/api/?results=10&nat=br')
       .then(response => response.json())
       .then(result =>{
@@ -95,13 +94,13 @@ class App extends Component {
   }
   
   search(evento){
-    
+    debugger;
     let pesquisa = evento.target.value;
 
     var array = JSON.parse(JSON.stringify(this.state.usersIntegral));
 
     array = array.filter(function(user){        
-      return user.name === pesquisa;
+      return user.name.first.includes(pesquisa) || user.email.includes(pesquisa);
     });    
 
     this.setState({show:array});
