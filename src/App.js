@@ -31,7 +31,8 @@ class App extends Component {
       attendeds:      [],
       usersIntegral:  [],
       show:           [],
-      pesquisa:         '',
+      showIntegral:   [],
+      pesquisa:       '',
       excluidos:      true,
       todos:          false,
       atendidos:      true,
@@ -53,6 +54,10 @@ class App extends Component {
     this.setState({show: array});
   }
 
+  setShowedIntegral(array){
+    this.setState({showIntegral: array});
+  }
+
   setSearch(evento){
     this.setState({pesquisa: evento.target.value});
   }
@@ -70,15 +75,15 @@ class App extends Component {
   }
 
   showDeleteds(){
-    this.setState({show: this.state.deleteds, excluidos: false, todos: true, atendidos: true});
+    this.setState({show: this.state.deleteds, showIntegral: this.state.deleteds, excluidos: false, todos: true, atendidos: true});
   }
 
   showAll(){
-    this.setState({show: this.state.users, excluidos: true, todos: false, atendidos: true});
+    this.setState({show: this.state.users, showIntegral: this.state.users, excluidos: true, todos: false, atendidos: true});
   }
 
   showAttendeds(){
-    this.setState({show: this.state.attendeds, excluidos: true, todos: true, atendidos: false});
+    this.setState({show: this.state.attendeds, showIntegral: this.state.attendeds, excluidos: true, todos: true, atendidos: false});
     let li = document.getElementById("liAtendidos");
 
     console.log(li);
@@ -88,7 +93,7 @@ class App extends Component {
     fetch('https://randomuser.me/api/?results=10&nat=br')
       .then(response => response.json())
       .then(result =>{
-          this.setState({users:result['results'], usersIntegral:result['results'], show:result['results']});        
+          this.setState({users:result['results'], showIntegral:result['results'], show:result['results']});        
         } 
       );
   }
@@ -97,13 +102,13 @@ class App extends Component {
     debugger;
     let pesquisa = evento.target.value;
 
-    var array = JSON.parse(JSON.stringify(this.state.usersIntegral));
+    var array = JSON.parse(JSON.stringify(this.state.showIntegral));
 
     array = array.filter(function(user){        
       return user.name.first.includes(pesquisa) || user.email.includes(pesquisa);
     });    
 
-    this.setState({show:array});
+    this.setShowed(array);
   }
 
   deleteUser(user) {
@@ -121,6 +126,7 @@ class App extends Component {
       this.setDeleteds(cloneDeleteds);
       this.setUsers(cloneUsers);
       this.setShowed(cloneUsers);
+      this.setShowedIntegral(cloneUsers);
     }
     else if(cloneAttendeds.find(x => x.login.uuid)){
       let removed = cloneAttendeds.filter(item => item.login.uuid===user.login.uuid);
@@ -132,6 +138,7 @@ class App extends Component {
       this.setDeleteds(cloneDeleteds);
       this.setAttendeds(cloneAttendeds);
       this.setShowed(cloneAttendeds);
+      this.setShowedIntegral(cloneAttendeds);
     }
     else
       alert('Você não pode excluir o usuário já deletado!');
@@ -152,6 +159,7 @@ class App extends Component {
       this.setUsers(cloneUsers);      
       this.setAttendeds(cloneAttendeds);
       this.setShowed(cloneAttendeds);
+      this.setShowedIntegral(cloneAttendeds);
     }
     else if(cloneDeleteds.find(x => x.login.uuid)){
       let removed = cloneDeleteds.filter(item => item.login.uuid===user.login.uuid);
@@ -163,6 +171,7 @@ class App extends Component {
       this.setUsers(cloneUsers);
       this.setDeleteds(cloneDeleteds);
       this.setShowed(cloneDeleteds);
+      this.setShowedIntegral(cloneDeleteds);
     }
     else
       alert('Você não pode recuperar o usuário já recuperado!');
@@ -183,6 +192,7 @@ class App extends Component {
       this.setAttendeds(cloneAttendeds);
       this.setUsers(cloneUsers);
       this.setShowed(cloneUsers);
+      this.setShowedIntegral(cloneUsers);
     }
     else if(cloneDeleteds.find(x => x.login.uuid)){
       let removed = cloneDeleteds.filter(item => item.login.uuid===user.login.uuid);
@@ -194,6 +204,7 @@ class App extends Component {
       this.setDeleteds(cloneDeleteds);
       this.setAttendeds(cloneAttendeds);
       this.setShowed(cloneDeleteds);
+      this.setShowedIntegral(cloneDeleteds);
     }  
     else
       alert('Você não pode atender o usuário já foi atendido!');
