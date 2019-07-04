@@ -4,7 +4,7 @@ import './App.css';
 import './static/css/base.css';
 import './static/font-awesome/css/font-awesome.min.css'
 import 'bootstrap/dist/css/bootstrap.css';
-import Usuario from './Usuario';
+// import Usuario from './Usuario';
 
 class App extends Component {
   constructor(props){
@@ -76,17 +76,33 @@ class App extends Component {
 
   showDeleteds(){
     this.setState({show: this.state.deleteds, showIntegral: this.state.deleteds, excluidos: false, todos: true, atendidos: true});
+    document.getElementById("iExcluidos").classList.add('ativo');
+    document.getElementById("spanExcluidos").classList.add('ativo');
+    document.getElementById("iAtendidos").classList.remove('ativo');
+    document.getElementById("spanAtendidos").classList.remove('ativo');
+    document.getElementById("iTodos").classList.remove('ativo');
+    document.getElementById("spanTodos").classList.remove('ativo');
   }
 
   showAll(){
     this.setState({show: this.state.users, showIntegral: this.state.users, excluidos: true, todos: false, atendidos: true});
+    document.getElementById("iTodos").classList.add('ativo');
+    document.getElementById("spanTodos").classList.add('ativo');
+    document.getElementById("iAtendidos").classList.remove('ativo');
+    document.getElementById("spanAtendidos").classList.remove('ativo');
+    document.getElementById("iExcluidos").classList.remove('ativo');
+    document.getElementById("spanExcluidos").classList.remove('ativo');
   }
 
   showAttendeds(){
+    debugger;
     this.setState({show: this.state.attendeds, showIntegral: this.state.attendeds, excluidos: true, todos: true, atendidos: false});
-    let li = document.getElementById("liAtendidos");
-
-    console.log(li);
+    document.getElementById("iAtendidos").classList.add('ativo');
+    document.getElementById("spanAtendidos").classList.add('ativo');
+    document.getElementById("iTodos").classList.remove('ativo');
+    document.getElementById("spanTodos").classList.remove('ativo');
+    document.getElementById("iExcluidos").classList.remove('ativo');
+    document.getElementById("spanExcluidos").classList.remove('ativo');
   }
 
   fetchUser(){
@@ -226,29 +242,25 @@ class App extends Component {
               <i className="fa fa-user fa-2x user"></i>
           </div>
         </div>
-        <Usuario show={this.state.isOpen}
-          onClose={this.toggleModal}>
-          Here's some content for the modal
-        </Usuario>
         <div className="row divList">
           <div className="col-2">
             <ul>
-                <li id="liTodos">
+                <li>
                   <button className="btn" placeholder="Exibir todos" onClick={this.showAll}>
-                    <i className="fa fa-list"></i>
-                    <span className="textFilter">Todos</span>
+                    <i className="fa fa-list ativo" id="iTodos"></i>
+                    <span className="textFilter ativo" id="spanTodos">Todos</span>
                   </button>
                 </li>
-                <li id="liAtendidos">
+                <li>
                   <button className="btn" placeholder="Exibir atendidos" onClick={this.showAttendeds}>
-                    <i className="fa fa-check"></i>
-                    <span className="textFilter">Atendidos</span>
+                    <i className="fa fa-check" id="iAtendidos"></i>
+                    <span className="textFilter" id="spanAtendidos">Atendidos</span>
                   </button>
                 </li>
-                <li id="liExcluidos">
+                <li>
                   <button className="btn" placeholder="Exibir excluídos" onClick={this.showDeleteds}>
-                    <i className="fa fa-trash filter"></i>
-                    <span className="textFilter">Lixeira</span>
+                    <i className="fa fa-trash filter" id="iExcluidos"></i>
+                    <span className="textFilter" id="spanExcluidos">Lixeira</span>
                   </button>
                 </li>
             </ul>
